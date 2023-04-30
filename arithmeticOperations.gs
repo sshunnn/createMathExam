@@ -6,66 +6,69 @@
  * @returns {Object} problemList - 問題のリスト
  */
 const createIntegerProblemList = (problemRange, quantity) => {
-    console.log("aaaaa")
-    console.log(problemRange)
     const problemList = []
     for (let i = 0; i < quantity; i++) {
-      const problemInfo = { first: 0, second: 0, operater: '' }
-  
-      problemInfo.first = Math.floor(Math.random() * (problemRange.maxInt + 1 - problemRange.minInt)) + problemRange.minInt;
-      problemInfo.second = Math.floor(Math.random() * (problemRange.maxInt + 1 - problemRange.minInt)) + problemRange.minInt;
-      problemInfo.operater = Math.floor(Math.random() * 4);
-  
-      problemList.push(problemInfo)
+        const problemInfo = { first: 0, second: 0, operater: '' }
+
+        problemInfo.first = Math.floor(Math.random() * (problemRange.maxInt + 1 - problemRange.minInt)) + problemRange.minInt;
+        problemInfo.second = Math.floor(Math.random() * (problemRange.maxInt + 1 - problemRange.minInt)) + problemRange.minInt;
+        problemInfo.operater = Math.floor(Math.random() * 4);
+
+        problemList.push(problemInfo)
     }
     return problemList;
-  }
-  
-  /**
-   * 問題の計算をするメソッド
-   * @param {Object} outputList - 問題のリスト
-   * @returns {Object} outputList - 解答のリスト
-   */
-  const calculate = (outputList) => {
+}
+
+/**
+ * 問題の計算をするメソッド
+ * @param {Object} outputList - 問題のリスト
+ * @returns {Object} outputList - 解答のリスト
+ */
+const calculate = (outputList) => {
     outputList.forEach((problemInfo, index) => {
-      problemInfo.result = "";
-  
-      switch (problemInfo.operater) {
-        case 0:
-          Object.assign(problemInfo, { result: problemInfo.first + problemInfo.second });
-          break;
-        case 1:
-          Object.assign(problemInfo, { result: problemInfo.first - problemInfo.second });
-          break;
-        case 2:
-          Object.assign(problemInfo, { result: problemInfo.first * problemInfo.second });
-          break;
-        case 3:
-          if (problemInfo.first < 0) {
-            problemInfo.first = problemInfo.first * (-1);
-          } else if (problemInfo.second < 0) {
-            problemInfo.second = problemInfo.second * (-1);
-          }
-          const division = problemInfo.first / problemInfo.second | 0;
-          Object.assign(problemInfo, { result: problemInfo.first / problemInfo.second | 0 });
-          if (problemInfo.first % problemInfo.second !== 0) {
-            Object.assign(problemInfo, { isRemainder: problemInfo.first % problemInfo.second });
-          }
-          break;
-        default:
-          break;
-      }
+        problemInfo.result = "";
+
+        switch (problemInfo.operater) {
+            case 0:
+                Object.assign(problemInfo, { result: problemInfo.first + problemInfo.second });
+                break;
+            case 1:
+                Object.assign(problemInfo, { result: problemInfo.first - problemInfo.second });
+                break;
+            case 2:
+                Object.assign(problemInfo, { result: problemInfo.first * problemInfo.second });
+                break;
+            case 3:
+                if (problemInfo.first < 0) {
+                    problemInfo.first = problemInfo.first * (-1);
+                } else if (problemInfo.second < 0) {
+                    problemInfo.second = problemInfo.second * (-1);
+                }
+                const division = problemInfo.first / problemInfo.second | 0;
+                Object.assign(problemInfo, { result: problemInfo.first / problemInfo.second | 0 });
+                if (problemInfo.first % problemInfo.second !== 0) {
+                    Object.assign(problemInfo, { isRemainder: problemInfo.first % problemInfo.second });
+                }
+                break;
+            default:
+                break;
+        }
     })
     return outputList
-  }
-  
-  function addBrackets(value) {
+}
+
+//　TODO リファクタが必要
+/**
+ * 負数を丸括弧でくくるメソッド　
+ * @param {Number} value - 対象の数値 
+ * @returns {String} value - 数値の変換後の文字列
+ */
+const addBrackets = (value) => {
     if (value < 0) {
-      return "( " + value + " )";
+        return "( " + value + " )";
     } else {
-      return value;
+        return value;
     }
-  }
-  
-  
-  
+}
+
+
