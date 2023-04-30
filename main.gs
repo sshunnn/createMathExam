@@ -22,7 +22,6 @@ function myFunction() {
 
   // 問題作成
   const problemList = createProblem(sort, problemRange, quantity);
-  console.log(problemList)
   // 計算結果
   const answerList = calculate(problemList);
   // 問題出力
